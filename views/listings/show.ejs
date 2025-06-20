@@ -11,6 +11,9 @@
         alt="Listing Image"
       />
       <div class="card-body">
+        <p class="card-text">
+          <strong>Posted by:</strong> <%= listing.owner.username %>
+        </p>
         <ul>
           <li><%= listing.description%></li>
           <li>&#8377; <%= listing.price.toLocaleString("en-IN")%></li>
@@ -21,6 +24,7 @@
     </div>
 
     <br />
+    <% if(currentUser && listing.owner._id.equals(currentUser._id)){%>
     <div class="btns">
       <a
         href="/listings/<%=listing._id%>/edit"
@@ -32,8 +36,11 @@
         <button class="btn btn-dark mb-3 offset-5">Delete</button>
       </form>
     </div>
+    <% }%>
+
     <div class="col-8 offset-3">
       <hr />
+      <% if(currentUser){ %>
       <h4>Leave a Review</h4>
       <form
         method="post"
@@ -67,12 +74,15 @@
         <button class="btn btn-outline-dark">Submit</button>
       </form>
       <hr />
+      <% } %>
       <h4>All Reviews</h4>
       <!-- <p><%=listing.reviews%></p> -->
       <ul class="list-group mb-3">
         <% if (listing.reviews.length > 0) { %> <%
         listing.reviews.forEach((review) => { %>
         <li class="list-group-item">
+          <strong class="card-title"> @<%= review.author.username %></strong>
+          <br />
           <strong>Rating:</strong> <%= review.rating %> / 5 <br />
           <strong>Comment:</strong> <%= review.comment %>
           <form

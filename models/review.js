@@ -7,11 +7,11 @@ const reviewSchema = new Schema({
   //     ref: 'Listing',
   //     required: true
   // },
-  // userId: {
-  //     type: Schema.Types.ObjectId,
-  //     ref: 'User',
-  //     required: true
-  // },
+  author: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
   rating: {
     type: Number,
     required: true,
