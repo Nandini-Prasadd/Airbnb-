@@ -40,7 +40,7 @@ module.exports.isAuthor = async (req, res, next) => {
 };
 
 module.exports.validateListing = (req, res, next) => {
-  const { error } = listingSchema.validate(req.body);
+  const { error } = listingSchema.validate(res.body);
   if (error) {
     const msg = error.details.map((el) => el.message).join(",");
     throw new ExpressError(msg, 400);
