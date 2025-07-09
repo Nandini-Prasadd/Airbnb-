@@ -1,6 +1,7 @@
-if (process.envNODE_ENV != "production") {
+if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
+
 // console.log(process.env.SECRET);
 
 const express = require("express");
@@ -130,6 +131,7 @@ app.use((err, req, res, next) => {
   //res.status(statusCode).send(message);
 });
 
-app.listen(process.env.PORT, () => {
-  console.log("Server is running");
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
