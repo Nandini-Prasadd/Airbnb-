@@ -131,7 +131,16 @@ app.use((err, req, res, next) => {
   //res.status(statusCode).send(message);
 });
 
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+const http = require("http");
+const server = http.createServer(app);
+
+
+server.keepAliveTimeout = 120000;
+server.headersTimeout = 120000;
+
+const PORT = process.env.PORT || 10000;
+const HOST = "0.0.0.0";
+
+server.listen(PORT, HOST, () => {
+  console.log(`Server running at http://${HOST}:${PORT}`);
 });
