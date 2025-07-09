@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const initData = require("./data");
 const Listing = require("../models/listing");
+const dbUrl = process.env.ATLASDB_URL;
 
 main()
   .then(() => {
@@ -11,9 +12,7 @@ main()
   });
 
 async function main() {
-  await mongoose.connect(
-    "mongodb+srv://nandini070418:gBkETw18XKH4IWQV@cluster0.tfjhk81.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-  );
+  await mongoose.connect(dbUrl);
 }
 
 const initDB = async () => {
